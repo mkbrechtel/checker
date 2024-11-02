@@ -1,0 +1,24 @@
+# checker systemd units
+
+[Unit]
+Description=Handle %i checker notifications
+#After=checker@%i.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/etc/checker/checks/%i
+# Run all applicable notification scripts based on service result
+ExecStart=/bin/bash -c '\
+    env;\
+    for script in /etc/checker/notifiers/*.sh; do\
+        if [ -x "$script" ]; then\
+            echo Running "$script" ; \
+            "$script" "$result" & \
+        fi;\
+    done;\
+    wait;'
+# Get the exit status from the main checker service
+#Environment=EXIT_STATUS=%j
+#EnvironmentFile=-/etc/checker/check/%i/check.env
+StandardOutput=journal
+StandardError=journal

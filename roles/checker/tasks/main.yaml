@@ -1,8 +1,31 @@
 ---
 
+- name: Create base directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: u=rwX,g=rX,o=rX
+    owner: root
+    group: root
+  loop:
+    - /etc/checker
+    - /etc/checker/checks
+    - /etc/checker/notifiers
+
+- name: Copy checker files
+  ansible.builtin.copy:
+    src: checker/
+    dest: /etc/checker/
+    mode: u=rwX,g=rX,o=rX
+    owner: root
+    group: root
+
 - name: Copy Ansible templates
   ansible.builtin.copy:
     src: systemd/
     dest: /etc/systemd/system/
+    mode: u=rwX,g=rX,o=rX
+    owner: root
+    group: root
   notify:
     - Reload systemd daemon

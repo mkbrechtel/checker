@@ -2,16 +2,17 @@
 
 [Unit]
 Description=Checker checks out %i
-OnSuccess=checker-success-handler@%i.service
-OnFailure=checker-failure-handler@%i.service
+OnSuccess=checker-notifier@%i.service
+OnFailure=checker-notifier@%i.service
 
 [Service]
-WorkingDirectory=/etc/checker/%i
-ExecStart=/etc/checker/%i/check.sh
-#EnvironmentFile=/etc/checker/%i/check.env
+WorkingDirectory=/etc/checker/checks/%i
+ExecStart=/etc/checker/checks/%i/check.sh
+EnvironmentFile=-/etc/checker/checks/%i/check.env
 #User=$USER
 #Group=$GROUP
-#Type=oneshot
+Type=oneshot
+#SuccessExitStatus=0 1 2 3
 
 [Install]
 WantedBy=checker.target
