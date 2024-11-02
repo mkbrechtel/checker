@@ -1,0 +1,7 @@
+---
+
+- name: Deploy checker to the current system
+  hosts: localhost
+  become: true
+  roles:
+    - checker

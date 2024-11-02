@@ -1,0 +1,8 @@
+---
+
+- name: Copy Ansible templates
+  ansible.builtin.copy:
+    src: systemd/
+    dest: /etc/systemd/system/
+  notify:
+    - Reload systemd daemon

@@ -1,0 +1,11 @@
+# checker systemd units
+
+[Unit]
+Description=Handle %i checker failure.
+
+[Service]
+ExecStart=echo Meh!
+Type=oneshot
+
+[Install]
+WantedBy=checker.target

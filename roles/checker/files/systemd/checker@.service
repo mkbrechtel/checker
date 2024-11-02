@@ -1,0 +1,17 @@
+# checker systemd units
+
+[Unit]
+Description=Checker checks out %i
+OnSuccess=checker-success-handler@%i.service
+OnFailure=checker-failure-handler@%i.service
+
+[Service]
+WorkingDirectory=/etc/checker/%i
+ExecStart=/etc/checker/%i/check.sh
+#EnvironmentFile=/etc/checker/%i/check.env
+#User=$USER
+#Group=$GROUP
+#Type=oneshot
+
+[Install]
+WantedBy=checker.target

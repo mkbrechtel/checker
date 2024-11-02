@@ -1,0 +1,10 @@
+# checker systemd units
+
+[Unit]
+Description=Run checker %i hourly (with a small random delay).
+
+[Timer]
+OnUnitActiveSec=1h
+OnBootSec=5min
+RandomizedDelaySec=300
+Unit=checker@%i.service
