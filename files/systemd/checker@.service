@@ -7,11 +7,11 @@ Description=Checker checks out %i
 WorkingDirectory=/etc/checker/checks/%i
 ExecStart=/etc/checker/checks/%i/check.sh
 ExecStopPost=/bin/bash -c '\
-    env;\
+    systemctl status %n;\
     for script in /etc/checker/notifiers/*.sh; do\
         if [ -x "$script" ]; then\
-            echo Running "$script" ; \
-            "$script" "$result" & \
+            echo "Notifying with $script";\
+            "$script" "%h" "%i" "$EXIT_CODE" &\
         fi;\
     done;\
     wait;'
