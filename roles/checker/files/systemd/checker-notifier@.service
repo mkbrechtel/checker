@@ -1,23 +1,40 @@
-# checker systemd units
-
 [Unit]
 Description=Handle %i checker notifications
+# We want this to run after the checker service completes
+After=checker@%i.service
+Wants=checker@%i.service
 
 [Service]
 Type=oneshot
 WorkingDirectory=/etc/checker/checks/%i
-# Run all applicable notification scripts based on service result
+# Get service result information using systemctl show
 ExecStart=/bin/bash -c '\
+    # Get the status of the triggering checker service\
+    eval $(systemctl show checker@%i.service \
+        -p ExecMainStatus \
+        -p Result \
+        -p StatusText \
+        --format=shell);\
+    \
     env;\
+    # Export as environment variables for notification scripts\
+    export CHECK_EXIT_CODE="$ExecMainStatus";\
+    export CHECK_RESULT="$Result";\
+    export CHECK_STATUS="$StatusText";\
+    \
+    # Get the last 50 lines of logs from the checker service\
+    export CHECK_LOG="$(journalctl -u checker@%i.service -n 50 -o cat)";\
+    \
+    # Run all notification scripts with the exported variables\
     for script in /etc/checker/notifiers/*.sh; do\
         if [ -x "$script" ]; then\
-            echo Running "$script" ; \
-            "$script" "$result" & \
+            echo "Running $script";\
+            "$script" & \
         fi;\
     done;\
     wait;'
-# Get the exit status from the main checker service
-#Environment=EXIT_STATUS=%j
-#EnvironmentFile=-/etc/checker/check/%i/check.env
+
+# Preserve the environment from the checker service
+PassEnvironment=*
 StandardOutput=journal
 StandardError=journal

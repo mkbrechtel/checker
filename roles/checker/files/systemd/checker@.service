@@ -12,7 +12,7 @@ EnvironmentFile=-/etc/checker/checks/%i/check.env
 #User=$USER
 #Group=$GROUP
 Type=exec
-#SuccessExitStatus=0 1 2 3
+SuccessExitStatus=0 1 2 3
 
 [Install]
 WantedBy=checker.target
