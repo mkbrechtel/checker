@@ -20,6 +20,3 @@ EnvironmentFile=-/etc/checker/checks/%i/check.env
 #Group=$GROUP
 Type=exec
 #SuccessExitStatus=0 1 2 3
-
-[Install]
-WantedBy=checker.target

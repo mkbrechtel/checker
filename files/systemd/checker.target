@@ -1,4 +1,0 @@
-# checker systemd units
-
-[Unit]
-Description=Checker target.
