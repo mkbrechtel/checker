@@ -2,12 +2,19 @@
 
 [Unit]
 Description=Checker checks out %i
-OnSuccess=checker-notifier@%i.service
-OnFailure=checker-notifier@%i.service
 
 [Service]
 WorkingDirectory=/etc/checker/checks/%i
 ExecStart=/etc/checker/checks/%i/check.sh
+ExecStopPost=/bin/bash -c '\
+    env;\
+    for script in /etc/checker/notifiers/*.sh; do\
+        if [ -x "$script" ]; then\
+            echo Running "$script" ; \
+            "$script" "$result" & \
+        fi;\
+    done;\
+    wait;'
 EnvironmentFile=-/etc/checker/checks/%i/check.env
 #User=$USER
 #Group=$GROUP
