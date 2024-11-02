@@ -2,7 +2,6 @@
 
 [Unit]
 Description=Handle %i checker notifications
-#After=checker@%i.service
 
 [Service]
 Type=oneshot
