@@ -4,7 +4,9 @@
   hosts: localhost
   become: true
   roles:
-    - checker
+    - name: checker
+    - name: check_memory
+      check_id: memory
     - name: check_ping
       check_id: ping-google
       check_ping_hostname: google.de

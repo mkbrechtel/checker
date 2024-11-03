@@ -1,0 +1,2 @@
+---
+check_cmd: check_ping -H {{ check_ping_hostname }} -w 10,2% -c 20,5%

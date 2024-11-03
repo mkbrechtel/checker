@@ -6,24 +6,9 @@ Description=Checker checks out %i
 [Service]
 WorkingDirectory=/etc/checker/checks/%i
 ExecStart=/etc/checker/checks/%i/check.sh
-ExecStopPost=/bin/bash -c '\
-    failed=0;\
-    pids="";\
-    for script in /etc/checker/notifiers/*.sh; do\
-        if [ -x "$script" ]; then\
-            echo "Notifying with $script";\
-            "$script" "%h" "%i" "$EXIT_CODE" & pids="$pids $!";\
-        fi;\
-    done;\
-    for pid in $pids; do\
-        wait $pid;\
-        if [ $? -ne 0 ]; then\
-            echo "A notifier failed with exit code $?";\
-            failed=8;\
-        fi;\
-    done;\
-    exit $failed;'
-EnvironmentFile=-/etc/checker/checks/%i/check.env
+ExecStopPost=/etc/checker/notify.sh "%h" "%i"
+Environment=PATH=/usr/lib/nagios/plugins:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=/etc/checker/checks/%i/check.env
 #User=$USER
 #Group=$GROUP
 Type=exec

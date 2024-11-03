@@ -12,11 +12,19 @@
     - /etc/checker/checks
     - /etc/checker/notifiers
 
-- name: Copy checker files
+- name: Copy readme files
   ansible.builtin.copy:
-    src: checker/
+    src: dir-readme/
     dest: /etc/checker/
     mode: u=rwX,g=rX,o=rX
+    owner: root
+    group: root
+
+- name: Copy notify script
+  ansible.builtin.copy:
+    src: notify.sh
+    dest: /etc/checker/notify.sh
+    mode: u=rwx,g=rx,o=rx
     owner: root
     group: root
 
