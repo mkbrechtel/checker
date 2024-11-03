@@ -1,0 +1,19 @@
+---
+
+- name: Directory
+  ansible.builtin.file:
+    path: "/etc/checker/checks/{{ check_id }}"
+    state: directory
+    mode: u=rwX,g=rX,o=rX
+
+- name: Script
+  ansible.builtin.template:
+    src: check.sh.j2
+    dest: "/etc/checker/checks/{{ check_id }}/check.sh"
+    mode: u=rwx,g=rx,o=rx
+
+# - name: Environment
+#   ansible.builtin.copy:
+#     content: check.env
+#     dest: "/etc/checker/checks/{{ check_id }}/check.env"
+#     mode: u=rwX,g=rX,o=rX

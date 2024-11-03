@@ -5,3 +5,6 @@
   become: true
   roles:
     - checker
+    - name: check_ping
+      check_id: ping-google
+      check_ping_hostname: google.de

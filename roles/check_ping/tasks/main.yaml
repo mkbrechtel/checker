@@ -1,0 +1,10 @@
+---
+
+- name: Install monitoring-plugins-basic packages
+  ansible.builtin.apt:
+    pkg:
+      - monitoring-plugins-basic
+
+- name: Import deploy instance role
+  import_role:
+    role: check
