@@ -11,6 +11,7 @@
     - /etc/checker
     - /etc/checker/checks
     - /etc/checker/notifiers
+    - /run/checker
 
 - name: Copy readme files
   ansible.builtin.copy:
@@ -20,13 +21,16 @@
     owner: root
     group: root
 
-- name: Copy notify script
+- name: Copy scripts
   ansible.builtin.copy:
-    src: notify.sh
-    dest: /etc/checker/notify.sh
+    src: "{{ item }}"
+    dest: "/etc/checker/{{ item }}"
     mode: u=rwx,g=rx,o=rx
     owner: root
     group: root
+  loop:
+    - checker.sh
+    - notify.sh
 
 - name: Copy Ansible templates
   ansible.builtin.copy:
