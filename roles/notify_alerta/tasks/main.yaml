@@ -1,0 +1,6 @@
+---
+- name: Copy alerta script
+  ansible.builtin.copy:
+    src: alerta.sh
+    dest: /etc/checker/notifiers/alerta.sh
+    mode: u=rwx,g=rx,o=rx
