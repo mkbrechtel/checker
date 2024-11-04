@@ -3,7 +3,7 @@
 hostname=$1
 check_id=$2
 run_file=$3
-exit_code=$EXIT_CODE
+exit_code=$EXIT_STATUS
 
 failed=0
 pids=""

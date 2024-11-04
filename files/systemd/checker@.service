@@ -6,7 +6,7 @@ Description=Checker checks out %i
 [Service]
 WorkingDirectory=/etc/checker/checks/%i
 ExecStart=/etc/checker/checker.sh /run/checker/%i.out
-ExecStopPost=/etc/checker/notify.sh "%h" "%i" /run/checker/%i.out
+ExecStopPost=/etc/checker/notify.sh "%H" "%i" /run/checker/%i.out
 Environment=PATH=/usr/lib/nagios/plugins:/usr/local/bin:/usr/bin:/bin
 EnvironmentFile=/etc/checker/checks/%i/check.env
 Type=exec
