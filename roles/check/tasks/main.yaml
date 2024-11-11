@@ -1,5 +1,10 @@
 ---
 
+# Generic check role. Import it like this in your check:
+# - name: Import deploy instance role
+#   ansible.builtin.import_role:
+#     role: check
+
 - name: "Directory for {{ check_id }}"
   ansible.builtin.file:
     path: "/etc/checker/checks/{{ check_id }}"

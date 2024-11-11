@@ -1,0 +1,6 @@
+---
+
+- name: Install monitoring-plugins-basic packages
+  ansible.builtin.apt:
+    pkg:
+      - monitoring-plugins-basic
