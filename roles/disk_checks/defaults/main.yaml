@@ -1,0 +1,36 @@
+---
+# Filesystems to exclude by type
+checks_for_disks_excluded_filesystems:
+  - tmpfs
+  - devtmpfs
+  - proc
+  - sysfs
+  - cgroup
+  - devpts
+  - securityfs
+  - pstore
+  - autofs
+  - mqueue
+  - debugfs
+  - hugetlbfs
+  - fusectl
+  - nfs
+  - nfs4
+  - overlay
+
+# Mount points to explicitly exclude
+checks_for_disks_excluded_mounts: []
+
+# Minimum size in GB to monitor
+checks_for_disks_minimum_size_mb: 128
+
+# Filter mounts and extract just the mountpoints
+checks_for_disks_mounts: >-
+  {{
+    ansible_facts.mounts 
+    | rejectattr('fstype', 'in', checks_for_disks_excluded_filesystems)
+    | selectattr('size_total', '>', (checks_for_disks_minimum_size_mb * 1024 * 1024))
+    | map(attribute='mount')
+    | reject('in', checks_for_disks_excluded_mounts)
+    | list
+  }}

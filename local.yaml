@@ -5,9 +5,7 @@
   become: true
   roles:
     - name: checker
-    - name: check_memory
-      check_id: memory
-    - name: check_ping
-      check_id: ping-google
-      check_ping_hostname: google.de
+    - name: system_checks
+    - name: disk_checks
+    - name: network_checks
     - name: notify_alerta

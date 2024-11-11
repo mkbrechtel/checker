@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: check_ping
+    check_id: ping-google
+    check_ping_hostname: google.de
