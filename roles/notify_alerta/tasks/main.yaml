@@ -4,7 +4,7 @@
     name: jo
 
 - name: Copy alerta script
-  ansible.builtin.copy:
-    src: alerta.sh
+  ansible.builtin.template:
+    src: alerta.sh.j2
     dest: /etc/checker/notifiers/alerta.sh
-    mode: u=rwx,g=rx,o=rx
+    mode: u=rwx,g=x,o=x
