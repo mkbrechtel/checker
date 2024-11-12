@@ -1,4 +1,8 @@
 ---
+- name: Make sure the jo package is installed
+  ansible.builtin.package:
+    name: jo
+
 - name: Copy alerta script
   ansible.builtin.copy:
     src: alerta.sh
