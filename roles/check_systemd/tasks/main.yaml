@@ -1,0 +1,10 @@
+---
+
+- name: Install monitoring-plugins-systemd package
+  ansible.builtin.apt:
+    pkg:
+      - monitoring-plugins-systemd
+
+- name: Import deploy instance role
+  ansible.builtin.import_role:
+    role: check

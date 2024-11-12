@@ -1,4 +1,4 @@
 ---
 dependencies:
+  - role: check_systemd
   - role: check_memory
-
