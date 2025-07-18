@@ -1,0 +1,4 @@
+---
+notify_alerta_api_alert_url: http://localhost:8080/api/alert
+notify_alerta_api_key: "EUeDlg7Ro4tKlOMW5-v5nMnTa08F1atbRIvavs3-"
+notify_alerta_environment: Development
