@@ -11,3 +11,12 @@ Environment=PATH=/usr/lib/nagios/plugins:/usr/local/bin:/usr/bin:/bin
 EnvironmentFile=/etc/checker/checks/%i/check.env
 Type=exec
 SuccessExitStatus=0 1 2 3
+
+# Performance and resource limits (configurable via check.env)
+TimeoutStartSec=${CHECK_TIMEOUT}
+MemoryMax=${CHECK_MEMORY_MAX}
+CPUQuota=${CHECK_CPU_QUOTA}
+
+# Process limits (configurable via check.env)
+LimitNOFILE=${CHECK_LIMIT_NOFILE}
+LimitNPROC=${CHECK_LIMIT_NPROC}

@@ -19,6 +19,14 @@
 
 - name: "Environment for {{ check_id }}"
   ansible.builtin.copy:
-    content: '#'
+    content: |
+      # Resource limits (used by systemd service)
+      CHECK_TIMEOUT={{ check_timeout | default(60) }}
+      CHECK_MEMORY_MAX={{ check_memory_max | default('100M') }}
+      CHECK_CPU_QUOTA={{ check_cpu_quota | default('20%') }}
+      
+      # Process limits
+      CHECK_LIMIT_NOFILE={{ check_limit_nofile | default(1024) }}
+      CHECK_LIMIT_NPROC={{ check_limit_nproc | default(32) }}
     dest: "/etc/checker/checks/{{ check_id }}/check.env"
     mode: u=rwX,g=rX,o=rX

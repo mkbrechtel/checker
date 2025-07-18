@@ -32,6 +32,14 @@
     - checker.sh
     - notify.sh
 
+- name: Install checker monitor script
+  ansible.builtin.copy:
+    src: checker-monitor.sh
+    dest: /usr/local/bin/checker-monitor
+    mode: '0755'
+    owner: root
+    group: root
+
 - name: Copy Ansible templates
   ansible.builtin.copy:
     src: systemd/

@@ -2,10 +2,13 @@
 
 set -e
 
-# Alerta API settings
-ALERTA_API_ALERT_URL={{ notify_alerta_api_alert_url | quote }}
-ALERTA_API_KEY={{ notify_alerta_api_key | quote }}
-ALERTA_ENVIRONMENT={{ notify_alerta_environment | quote }}
+# Load configuration from .env file
+if [ -f /etc/checker/notify_alerta.env ]; then
+    source /etc/checker/notify_alerta.env
+else
+    echo "Error: /etc/checker/notify_alerta.env not found" >&2
+    exit 1
+fi
 
 # Parse arguments
 hostname="$1"
@@ -21,6 +24,12 @@ case $exit_code in
     *) severity="debug" ;;
 esac
 
+# Build curl command with optional auth header
+CURL_OPTS="-s -X POST -H \"Content-Type: application/json\""
+if [ -n "$ALERTA_API_KEY" ]; then
+    CURL_OPTS="$CURL_OPTS -H \"Authorization: Key $ALERTA_API_KEY\""
+fi
+
 cat \
 | jo \
     text=@- \
@@ -32,10 +41,7 @@ cat \
     service="[\"$hostname\"]" \
     origin=checker \
     type=checkerCheck \
-| curl -s \
-    -X POST \
-    -H "Authorization: Key $ALERTA_API_KEY" \
-    -H "Content-Type: application/json" \
+| eval curl $CURL_OPTS \
     -d @- \
     --fail-with-body \
     "$ALERTA_API_ALERT_URL"
