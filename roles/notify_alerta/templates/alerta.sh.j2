@@ -2,16 +2,15 @@
 
 set -e
 
-# Default Alerta API settings
-ALERTA_API_ALERT_URL=${ALERTA_API_URL:-"http://localhost:8080/api/alert"}
-ALERTA_API_KEY=${ALERTA_API_KEY:-"EUeDlg7Ro4tKlOMW5-v5nMnTa08F1atbRIvavs3-"}
-ALERTA_ENVIRONMENT=${ALERTA_ENVIRONMENT:-"Development"}
+# Alerta API settings
+ALERTA_API_ALERT_URL={{ notify_alerta_api_alert_url | quote }}
+ALERTA_API_KEY={{ notify_alerta_api_key | quote }}
+ALERTA_ENVIRONMENT={{ notify_alerta_environment | quote }}
 
 # Parse arguments
 hostname="$1"
 check_id="$2"
 exit_code="$3"
-
 
 # Map exit code to severity
 case $exit_code in
