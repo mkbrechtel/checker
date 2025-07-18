@@ -22,6 +22,3 @@ RUN mkdir -p /etc/systemd/system/console-getty.service.d && \
     echo 'ExecStart=-/sbin/agetty --autologin root --noclear --keep-baud console 115200,38400,9600 $TERM' >> /etc/systemd/system/console-getty.service.d/autologin.conf && \
     echo 'ExecStopPost=/bin/systemctl poweroff' >> /etc/systemd/system/console-getty.service.d/autologin.conf && \
     systemctl set-default multi-user.target
-
-# Add shutdown on logout to root's bashrc
-#RUN echo 'trap "systemctl poweroff" EXIT' >> /root/.bashrc
