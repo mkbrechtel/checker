@@ -9,5 +9,5 @@ else
     podman build -t checker-devenv -f Containerfile .
     
     echo "Creating new container 'checker-devenv'..."
-    podman run --name checker-devenv -it -v ./:/mnt/checker:rw checker-devenv /lib/systemd/systemd
+    podman run --name checker-devenv --hostname checker-devenv -it -v ./:/mnt/checker:rw checker-devenv /lib/systemd/systemd
 fi
