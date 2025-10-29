@@ -1,0 +1,16 @@
+version = 1
+SPDX-PackageName = "checker"
+SPDX-PackageSupplier = "Markus Katharina Brechtel <markus.katharina.brechtel@thengo.net>"
+SPDX-PackageDownloadLocation = "https://github.com/yourusername/checker"
+
+[[annotations]]
+path = "**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2024 Markus Katharina Brechtel <markus.katharina.brechtel@thengo.net>"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = [".gitignore", ".git"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2024 Markus Katharina Brechtel <markus.katharina.brechtel@thengo.net>"
+SPDX-License-Identifier = "Apache-2.0"

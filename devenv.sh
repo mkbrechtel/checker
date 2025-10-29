@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: 2024 Markus Katharina Brechtel <markus.katharina.brechtel@thengo.net>
+# SPDX-License-Identifier: Apache-2.0
 
 # Check if container already exists
 if podman ps -a --filter name=checker-devenv --format "{{.Names}}" | grep -q "^checker-devenv$"; then

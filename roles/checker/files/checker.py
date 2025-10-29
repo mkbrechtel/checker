@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2024 Markus Katharina Brechtel <markus.katharina.brechtel@thengo.net>
+# SPDX-License-Identifier: Apache-2.0
 
 import sys
 import subprocess
