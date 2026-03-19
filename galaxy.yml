@@ -1,0 +1,18 @@
+---
+namespace: mkbrechtel
+name: checker
+version: 0.1.0
+readme: README.md
+authors:
+  - mkbrechtel
+description: A comprehensive monitoring and alerting system using systemd timers and Nagios plugins
+license_file: LICENSES/Apache-2.0.txt
+build_ignore:
+  - mkosi.*
+  - Containerfile
+  - test
+  - docs
+  - todo.txt
+  - REUSE.toml
+  - CHANGELOG.md
+  - .gitignore

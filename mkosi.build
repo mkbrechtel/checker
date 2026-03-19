@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+
+cd "$SRCDIR"
+ansible-galaxy collection build --output-path "$DESTDIR/tmp"
+ansible-galaxy collection install "$DESTDIR/tmp"/mkbrechtel-checker-*.tar.gz -p "$DESTDIR/usr/share/ansible/collections"
+rm -rf "$DESTDIR/tmp"
